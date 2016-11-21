@@ -2,8 +2,6 @@ package wekaclusterer;
 
 import java.util.Scanner;
 import weka.clusterers.ClusterEvaluation;
-import weka.clusterers.HierarchicalClusterer;
-import weka.clusterers.SimpleKMeans;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils;
 import weka.filters.unsupervised.attribute.Remove;
@@ -48,22 +46,22 @@ public class WekaClusterer {
         
         ClusterEvaluation eval = new ClusterEvaluation();
         if (input==1){ //build K-Means clusterer
-            SimpleKMeans clusterer = new SimpleKMeans();   // new instance of clusterer
+            myKMeans clusterer = new myKMeans();   // new instance of clusterer
             clusterer.setNumClusters(Integer.parseInt(options[1]));
             clusterer.buildClusterer(dataClusterer);    // build the clusterer
             eval.setClusterer(clusterer); // the cluster to evaluate
         } else if (input==2) {
-            HierarchicalClusterer clusterer = new HierarchicalClusterer();
+            myAgnes clusterer = new myAgnes();
             options[3] = "SINGLE";
             clusterer.setOptions(options);
             clusterer.buildClusterer(dataClusterer);    // build the clusterer
             eval.setClusterer(clusterer); // the cluster to evaluate
         } else if (input==3) {
-            HierarchicalClusterer clusterer = new HierarchicalClusterer();
+            myAgnes clusterer = new myAgnes();
             options[3] = "COMPLETE";
             clusterer.setOptions(options);
             clusterer.buildClusterer(dataClusterer);    // build the clusterer
-            eval.setClusterer(clusterer); // the cluster to evaluate
+            eval.setClusterer(clusterer); // t8he cluster to evaluate
         }
         
         eval.evaluateClusterer(dataset); // data to evaluate the clusterer on
